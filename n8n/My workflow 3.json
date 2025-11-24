@@ -1,0 +1,110 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "feedback-email",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "58ab1bb1-0ea6-403e-b4c9-e21288f49a4a",
+      "name": "Webhook",
+      "webhookId": "f7aa454a-e5d7-4f17-9350-718959ac59ed"
+    },
+    {
+      "parameters": {
+        "sendTo": "hahuja1493@gmail.com",
+        "subject": "=New Feedback - {{ $json.body.ticketId }} - {{ $json.body.name }}\n",
+        "emailType": "text",
+        "message": "=Ticket ID: {{ $json.body.ticketId }}\nName: {{ $json.body.name }}\nEmail: {{ $json.body.email }}\nCategory: {{ $json.body.category }}\nMessage: {{ $json.body.message }}\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        -128
+      ],
+      "id": "67ceec90-0c7b-4187-a91f-cbe30f07df55",
+      "name": "Send a message",
+      "webhookId": "63c321c5-b007-4f49-ab9d-49ca0b822780",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Y76Q8Bz9bELXENcL",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "harshuja1010@gmail.com",
+        "subject": "=Your Feedback Ticket—{{ $json.body.ticketId }}",
+        "emailType": "text",
+        "message": "=Hi {{ $json.body.name }},  Thanks for your feedback!  Your ticket ID: {{ $json.body.ticketId }} Category: {{ $json.body.category }} Message: {{ $json.body.message }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "68a81e46-b263-4eaa-8f80-14d406aa5d34",
+      "name": "student email",
+      "webhookId": "58352d83-b3b3-4b8a-b32b-311ff9cb4a42",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Y76Q8Bz9bELXENcL",
+          "name": "Gmail account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "student email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "student email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e7e83ee1-d84a-416d-a90d-2fcf2f7da465",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "13493b4fa7a737703ebd189b45e2e8776ef57185d7977b43aa9726a97679be76"
+  },
+  "id": "3PUOC2zg9sJ0Ygnm",
+  "tags": []
+}
